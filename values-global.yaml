@@ -1,0 +1,11 @@
+---
+global:
+  pattern: quickpat-3b99g3f3
+  singleArgoCD: true
+  secretLoader:
+    disabled: false
+main:
+  clusterGroupName: prod
+  multiSourceConfig:
+    enabled: true
+    clusterGroupChartVersion: 0.9.*
