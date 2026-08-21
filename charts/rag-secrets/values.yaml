@@ -1,0 +1,15 @@
+secretStore:
+  name: vault-backend
+  kind: ClusterSecretStore
+pgvector:
+  key: secret/data/hub/pgvector
+  refreshInterval: 2m0s
+llm-service:
+  key: secret/data/hub/llm-service
+  refreshInterval: 2m0s
+configure-pipeline:
+  key: secret/data/hub/configure-pipeline
+  refreshInterval: 2m0s
+llama-stack:
+  key: secret/data/hub/llama-stack
+  refreshInterval: 2m0s
