@@ -1,0 +1,52 @@
+clusterGroup:
+  name: prod
+  sharedValueFiles:
+  - /overrides/values-{{ $.Values.global.clusterPlatform }}.yaml
+  namespaces:
+    vault: {}
+    external-secrets-operator:
+      operatorGroup: true
+      targetNamespaces: []
+    external-secrets: {}
+    minio: {}
+    product-recommender-system: {}
+  subscriptions:
+    amq-streams:
+      name: amq-streams
+      namespace: openshift-operators
+      channel: stable
+    openshift-pipelines:
+      name: openshift-pipelines-operator-rh
+      namespace: openshift-operators
+      channel: latest
+    openshift-external-secrets:
+      name: openshift-external-secrets-operator
+      namespace: external-secrets-operator
+      channel: stable-v1
+  applications:
+    vault:
+      name: vault
+      namespace: vault
+      chart: hashicorp-vault
+      chartVersion: 0.1.*
+    openshift-external-secrets:
+      name: openshift-external-secrets
+      namespace: external-secrets
+      chart: openshift-external-secrets
+      chartVersion: 0.2.*
+    minio:
+      name: minio
+      namespace: minio
+      repoURL: https://github.com/rh-ai-quickstart/product-recommender-system.git
+      path: .
+      chartVersion: main
+    product-recommender-system:
+      name: product-recommender-system
+      namespace: product-recommender-system
+      repoURL: https://github.com/rh-ai-quickstart/product-recommender-system.git
+      path: .
+      chartVersion: main
+    quickpat-f5wx3hvs-secrets:
+      name: quickpat-f5wx3hvs-secrets
+      namespace: quickpat-f5wx3hvs
+      path: charts/quickpat-f5wx3hvs-secrets

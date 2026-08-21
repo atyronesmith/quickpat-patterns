@@ -1,0 +1,5 @@
+apiVersion: v2
+name: quickpat-f5wx3hvs-secrets
+version: 0.1.0
+description: ExternalSecret CRDs for quickpat-f5wx3hvs
+type: application

@@ -1,0 +1,19 @@
+metadata_version: '2.0'
+name: quickpat-f5wx3hvs
+pattern_version: '1.0'
+display_name: Quickpat F5Wx3Hvs
+tier: sandbox
+quickpat:
+  version: 0.2.0
+  generated: '2026-08-21'
+  strategy: remote
+  vault: true
+  source:
+    repo: https://github.com/rh-ai-quickstart/product-recommender-system.git
+    path: .
+    branch: main
+  operators:
+  - amq-streams
+  - openshift-pipelines
+  secret_groups:
+  - pgvector
