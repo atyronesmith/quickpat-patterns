@@ -1,0 +1,5 @@
+apiVersion: v2
+name: nvidia-config
+description: NVIDIA GPU Operator ClusterPolicy configuration
+version: 0.1.0
+type: application
