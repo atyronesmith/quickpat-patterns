@@ -1,0 +1,69 @@
+clusterGroup:
+  name: prod
+  sharedValueFiles:
+  - /overrides/values-{{ $.Values.global.clusterPlatform }}.yaml
+  namespaces:
+    vault: {}
+    external-secrets-operator:
+      operatorGroup: true
+      targetNamespaces: []
+    external-secrets: {}
+    cert-manager-operator:
+      operatorGroup: true
+      targetNamespaces: []
+    redhat-ods-operator:
+      operatorGroup: true
+      targetNamespaces: []
+    openshift-serverless:
+      operatorGroup: true
+      targetNamespaces: []
+    vllm-cpu:
+      labels:
+        opendatahub.io/dashboard: 'true'
+        modelmesh-enabled: 'false'
+  subscriptions:
+    cert-manager:
+      name: openshift-cert-manager-operator
+      namespace: cert-manager-operator
+      channel: stable
+    rhoai:
+      name: rhods-operator
+      namespace: redhat-ods-operator
+      channel: fast
+    openshift-pipelines:
+      name: openshift-pipelines-operator-rh
+      namespace: openshift-operators
+      channel: latest
+    serverless:
+      name: serverless-operator
+      namespace: openshift-serverless
+      channel: stable
+    servicemesh:
+      name: servicemeshoperator
+      namespace: openshift-operators
+      channel: stable
+    openshift-external-secrets:
+      name: openshift-external-secrets-operator
+      namespace: external-secrets-operator
+      channel: stable-v1
+  applications:
+    vault:
+      name: vault
+      namespace: vault
+      chart: hashicorp-vault
+      chartVersion: 0.1.*
+    openshift-external-secrets:
+      name: openshift-external-secrets
+      namespace: external-secrets
+      chart: openshift-external-secrets
+      chartVersion: 0.2.*
+    dsc:
+      name: dsc
+      namespace: redhat-ods-operator
+      path: charts/dsc
+    vllm-cpu:
+      name: vllm-cpu
+      namespace: vllm-cpu
+      repoURL: https://github.com/rh-ai-quickstart/llm-cpu-serving.git
+      path: .
+      chartVersion: main
