@@ -1,0 +1,11 @@
+---
+global:
+  pattern: vllm-cpu
+  singleArgoCD: true
+  secretLoader:
+    disabled: false
+main:
+  clusterGroupName: prod
+  multiSourceConfig:
+    enabled: true
+    clusterGroupChartVersion: 0.9.*
