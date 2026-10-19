@@ -1,0 +1,143 @@
+clusterGroup:
+  name: prod
+  sharedValueFiles:
+  - /overrides/values-{{ $.Values.global.clusterPlatform }}.yaml
+  namespaces:
+    vault: {}
+    external-secrets-operator:
+      operatorGroup: true
+      targetNamespaces: []
+    external-secrets: {}
+    openshift-nfd: {}
+    nvidia-gpu-operator: {}
+    redhat-ods-operator:
+      operatorGroup: true
+      targetNamespaces: []
+    openshift-serverless:
+      operatorGroup: true
+      targetNamespaces: []
+    copilot-backend: {}
+    copilot-llama-stack:
+      labels:
+        opendatahub.io/dashboard: 'true'
+        modelmesh-enabled: 'false'
+    copilot-ui: {}
+    minio: {}
+    nemotron-model:
+      labels:
+        opendatahub.io/dashboard: 'true'
+        modelmesh-enabled: 'false'
+    pg-airman-mcp: {}
+    pgadmin: {}
+    pgvector: {}
+    qwen3-model:
+      labels:
+        opendatahub.io/dashboard: 'true'
+        modelmesh-enabled: 'false'
+  subscriptions:
+    nfd:
+      name: nfd
+      namespace: openshift-nfd
+      channel: stable
+    nvidia:
+      name: gpu-operator-certified
+      namespace: nvidia-gpu-operator
+      channel: v24.9
+      source: certified-operators
+    rhoai:
+      name: rhods-operator
+      namespace: redhat-ods-operator
+      channel: fast
+    openshift-pipelines:
+      name: openshift-pipelines-operator-rh
+      namespace: openshift-operators
+      channel: latest
+    serverless:
+      name: serverless-operator
+      namespace: openshift-serverless
+      channel: stable
+    servicemesh:
+      name: servicemeshoperator
+      namespace: openshift-operators
+      channel: stable
+    openshift-external-secrets:
+      name: openshift-external-secrets-operator
+      namespace: external-secrets-operator
+      channel: stable-v1
+  applications:
+    vault:
+      name: vault
+      namespace: vault
+      chart: hashicorp-vault
+      chartVersion: 0.1.*
+    openshift-external-secrets:
+      name: openshift-external-secrets
+      namespace: external-secrets
+      chart: openshift-external-secrets
+      chartVersion: 0.2.*
+    nfd:
+      name: nfd
+      namespace: openshift-nfd
+      path: charts/nfd
+    nvidia-config:
+      name: nvidia-config
+      namespace: nvidia-gpu-operator
+      path: charts/nvidia-config
+    dsc:
+      name: dsc
+      namespace: redhat-ods-operator
+      path: charts/dsc
+    copilot-backend:
+      name: copilot-backend
+      namespace: copilot-backend
+      repoURL: https://github.com/rh-ai-quickstart/data-governance-co-pilot
+      path: .
+      chartVersion: main
+    copilot-llama-stack:
+      name: copilot-llama-stack
+      namespace: copilot-llama-stack
+      repoURL: https://github.com/rh-ai-quickstart/data-governance-co-pilot
+      path: .
+      chartVersion: main
+    copilot-ui:
+      name: copilot-ui
+      namespace: copilot-ui
+      repoURL: https://github.com/rh-ai-quickstart/data-governance-co-pilot
+      path: .
+      chartVersion: main
+    minio:
+      name: minio
+      namespace: minio
+      repoURL: https://github.com/rh-ai-quickstart/data-governance-co-pilot
+      path: .
+      chartVersion: main
+    nemotron-model:
+      name: nemotron-model
+      namespace: nemotron-model
+      repoURL: https://github.com/rh-ai-quickstart/data-governance-co-pilot
+      path: .
+      chartVersion: main
+    pg-airman-mcp:
+      name: pg-airman-mcp
+      namespace: pg-airman-mcp
+      repoURL: https://github.com/rh-ai-quickstart/data-governance-co-pilot
+      path: .
+      chartVersion: main
+    pgadmin:
+      name: pgadmin
+      namespace: pgadmin
+      repoURL: https://github.com/rh-ai-quickstart/data-governance-co-pilot
+      path: .
+      chartVersion: main
+    pgvector:
+      name: pgvector
+      namespace: pgvector
+      repoURL: https://github.com/rh-ai-quickstart/data-governance-co-pilot
+      path: .
+      chartVersion: main
+    qwen3-model:
+      name: qwen3-model
+      namespace: qwen3-model
+      repoURL: https://github.com/rh-ai-quickstart/data-governance-co-pilot
+      path: .
+      chartVersion: main
