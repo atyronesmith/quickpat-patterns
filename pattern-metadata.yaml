@@ -1,0 +1,22 @@
+metadata_version: '2.0'
+name: quickpat-7qnc3m3f
+pattern_version: '1.0'
+display_name: Quickpat 7Qnc3M3F
+tier: sandbox
+quickpat:
+  version: 0.2.0
+  generated: '2026-10-19'
+  strategy: remote
+  vault: true
+  source:
+    repo: https://github.com/rh-ai-quickstart/maas-code-assistant.git
+    path: .
+    branch: main
+  operators:
+  - cert-manager
+  - nfd
+  - nvidia-gpu
+  - openshift-ai
+  - rhbk
+  - serverless
+  - servicemesh

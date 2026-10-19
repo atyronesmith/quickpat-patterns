@@ -1,0 +1,110 @@
+clusterGroup:
+  name: prod
+  sharedValueFiles:
+  - /overrides/values-{{ $.Values.global.clusterPlatform }}.yaml
+  namespaces:
+    vault: {}
+    external-secrets-operator:
+      operatorGroup: true
+      targetNamespaces: []
+    external-secrets: {}
+    cert-manager-operator:
+      operatorGroup: true
+      targetNamespaces: []
+    openshift-nfd: {}
+    nvidia-gpu-operator: {}
+    redhat-ods-operator:
+      operatorGroup: true
+      targetNamespaces: []
+    openshell-agents:
+      operatorGroup: true
+      targetNamespaces:
+      - openshell-agents
+    openshift-serverless:
+      operatorGroup: true
+      targetNamespaces: []
+    charts:
+      labels:
+        opendatahub.io/dashboard: 'true'
+        modelmesh-enabled: 'false'
+  subscriptions:
+    cert-manager:
+      name: openshift-cert-manager-operator
+      namespace: cert-manager-operator
+      channel: stable
+    nfd:
+      name: nfd
+      namespace: openshift-nfd
+      channel: stable
+    nvidia:
+      name: gpu-operator-certified
+      namespace: nvidia-gpu-operator
+      channel: v24.9
+      source: certified-operators
+    rhoai:
+      name: rhods-operator
+      namespace: redhat-ods-operator
+      channel: fast
+    rhbk:
+      name: rhbk-operator
+      namespace: openshell-agents
+      channel: stable-v26
+    serverless:
+      name: serverless-operator
+      namespace: openshift-serverless
+      channel: stable
+    servicemesh:
+      name: servicemeshoperator
+      namespace: openshift-operators
+      channel: stable
+    openshift-external-secrets:
+      name: openshift-external-secrets-operator
+      namespace: external-secrets-operator
+      channel: stable-v1
+  applications:
+    vault:
+      name: vault
+      namespace: vault
+      chart: hashicorp-vault
+      chartVersion: 0.1.*
+    openshift-external-secrets:
+      name: openshift-external-secrets
+      namespace: external-secrets
+      chart: openshift-external-secrets
+      chartVersion: 0.2.*
+    nfd:
+      name: nfd
+      namespace: openshift-nfd
+      path: charts/nfd
+    nvidia-config:
+      name: nvidia-config
+      namespace: nvidia-gpu-operator
+      path: charts/nvidia-config
+    dsc:
+      name: dsc
+      namespace: redhat-ods-operator
+      path: charts/dsc
+    dependency-operators:
+      name: dependency-operators
+      namespace: charts
+      repoURL: https://github.com/rh-ai-quickstart/maas-code-assistant.git
+      path: .
+      chartVersion: main
+    install-operators:
+      name: install-operators
+      namespace: charts
+      repoURL: https://github.com/rh-ai-quickstart/maas-code-assistant.git
+      path: .
+      chartVersion: main
+    maas-code-assistant:
+      name: maas-code-assistant
+      namespace: charts
+      repoURL: https://github.com/rh-ai-quickstart/maas-code-assistant.git
+      path: .
+      chartVersion: main
+    keycloak:
+      name: keycloak
+      namespace: charts
+      repoURL: https://github.com/rh-ai-quickstart/maas-code-assistant.git
+      path: .
+      chartVersion: main
