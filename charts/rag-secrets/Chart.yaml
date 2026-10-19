@@ -1,0 +1,5 @@
+apiVersion: v2
+name: rag-secrets
+version: 0.1.0
+description: ExternalSecret CRDs for rag
+type: application
