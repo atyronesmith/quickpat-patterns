@@ -1,0 +1,5 @@
+apiVersion: v2
+name: quickpat-p9l1t3y9-secrets
+version: 0.1.0
+description: ExternalSecret CRDs for quickpat-p9l1t3y9
+type: application

@@ -1,0 +1,6 @@
+secretStore:
+  name: vault-backend
+  kind: ClusterSecretStore
+pgvector:
+  key: secret/data/hub/pgvector
+  refreshInterval: 2m0s
